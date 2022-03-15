@@ -15,7 +15,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: #dbdbd4;
+  background: linear-gradient(#009688 0 20%, #d9dbd5 20% 100%);
 }
 #app {
   display: flex;

@@ -47,27 +47,29 @@
                         <i class="fas fa-bell-slash"></i>
                     </div>
                     <div class="profileInfo">
-                        <span>{{ userLogged.name }}</span>
-                        <sub>{{ userLogged.text }}</sub>
+                        <span>{{ deskNotify.title }}</span>
+                        <sub>{{ deskNotify.sub }}</sub>
                     </div>
                 </div>
-
             </div>
-            <div v-for="(task, index) in users" :key="index" class="chats">
-                <div class="heading beetwen">
-                    <div class="beetwen">
+            <div class="filter">
+                <button id="btnFilter"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <input type="text" id="input-filter" placeholder="Cerca o inizia una nuova chat">
+            </div>
+
+            <!-- chat aperte -->
+            <div class="chats">
+                <ul>
+                    <li v-for="(task, index) in users" class="chatRow">
                         <div class="profileImg">
                             <img :src="users[index].img" alt="" srcset="">
                         </div>
                         <div class="profileInfo">
                             <span>{{ users[index].name }}</span>
+                            <sub>{{ users[index].text }}</sub>
                         </div>
-                    </div>
-                    <div class="headUtilities">
-
-                    </div>
-                </div>
-
+                    </li>
+                </ul>
             </div>
         </section>
         <!-- sezione destra textarea -->

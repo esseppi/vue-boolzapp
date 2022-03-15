@@ -18,6 +18,11 @@ const app = new Vue({
         img: 'img/avatar_4.jpg',
       },
       {
+        name: 'Alessandro B.',
+        text: 'Ultimo messaggio inviato',
+        img: 'img/avatar_8.jpg',
+      },
+      {
         name: 'Claudia',
         text: 'Ultimo messaggio inviato',
         img: 'img/avatar_5.jpg',
@@ -32,11 +37,25 @@ const app = new Vue({
         text: 'Ultimo messaggio inviato',
         img: 'img/avatar_7.jpg',
       },
+      {
+        name: 'Davide',
+        text: 'Ultimo messaggio inviato',
+        img: 'img/avatar_7.jpg',
+      },
+      {
+        name: 'Davide',
+        text: 'Ultimo messaggio inviato',
+        img: 'img/avatar_7.jpg',
+      },
     ],
     userLogged: {
       name: 'Sofia',
       text: 'Ultimo messaggio inviato',
       img: 'img/avatar_1.jpg',
+    },
+    deskNotify: {
+      title: 'Ricevi notifiche di nuovi messaggi',
+      sub: 'Attiva notifiche desktop',
     },
   },
 });

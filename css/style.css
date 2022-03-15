@@ -3,6 +3,13 @@
   margin: 0;
   padding: 0;
 }
+/* utilities */
+.beetwen {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+/* posizione app */
 body {
   height: 100vh;
   display: flex;
@@ -11,17 +18,67 @@ body {
   background-color: #dbdbd4;
 }
 #app {
+  display: flex;
   margin: auto;
   height: 90%;
   width: 85%;
-  background-color: brown;
 }
+.leftSide {
+  width: 35%;
+  height: 100%;
+  background-color: white;
+}
+.rightSide {
+  width: 65%;
+  height: 100%;
+  background-color: blue;
+}
+
+/* app header */
+
+.heading {
+  padding: 1%;
+  background-color: #eaeaea;
+  height: 8%;
+  width: 100%;
+}
+.headUtilities span {
+  margin: 0 3px;
+}
+/* adv desk notify */
+
+/* immagini del profilo */
 .profileImg img {
   height: 100%;
   width: 100%;
   border-radius: 100px;
 }
 .profileImg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 50px;
   width: 50px;
+}
+.profileInfo {
+  display: flex;
+  flex-direction: column;
+}
+.horizontal {
+  display: flex;
+  flex-direction: row;
+}
+.deskNotify {
+  padding: 4px 3px;
+  background-color: #8edafb;
+}
+.deskNotify .profileImg {
+  background-color: white;
+  color: #8edafb;
+  border-radius: 100px;
+}
+
+/* chats */
+.chats {
+  background-color: white;
 }

@@ -80,11 +80,11 @@
             <div class="heading beetwen">
                 <div class="beetwen">
                     <div class="profileImg">
-                        <img :src="usersArray[activeIndex].img" alt="" srcset="">
+                        <img :src="users[activeIndex].img" alt="" srcset="">
                     </div>
                     <div class="profileInfo">
-                        <span>{{ usersArray[activeIndex].name }}</span>
-                        <sub>{{ usersArray[activeIndex].text }}</sub>
+                        <span>{{ users[activeIndex].name }}</span>
+                        <sub>{{ users[activeIndex].text }}</sub>
                     </div>
                 </div>
                 <div class="headUtilities">
@@ -113,7 +113,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/luxon@2.3.1/build/global/luxon.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-    <script src="js/data.js"></script>
     <script src="js/app.js"></script>
 </body>
 

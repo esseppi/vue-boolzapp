@@ -50,7 +50,8 @@ body {
   height: var(---header-height);
   width: 100%;
 }
-.headUtilities span {
+.headUtilities button {
+  border: 0;
   margin: 3px 6px;
 }
 /* adv desk notify */
@@ -147,6 +148,8 @@ li:hover {
   width: 100%;
   background-image: url(../img/mine.jpg);
   background-size: contain;
+  display: flex;
+  flex-direction: column;
 }
 
 .newMsg {
@@ -172,4 +175,23 @@ li:hover {
   width: 30px;
   background-color: #f3eee9;
   color: #b1b1b1;
+}
+
+/* TEXT AREA */
+.message {
+  text-align: center;
+  padding: 1rem;
+  min-width: 20%;
+  max-width: 80%;
+  border-radius: 2rem;
+}
+.message.sent {
+  background-color: #d5f9ba;
+  align-self: flex-end;
+  margin-right: 1rem;
+}
+.message.received {
+  margin-left: 1rem;
+  background-color: white;
+  align-self: flex-start;
 }

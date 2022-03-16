@@ -8,51 +8,6 @@ const app = new Vue({
         img: 'img/avatar_2.jpg',
       },
       {
-        name: 'Michele',
-        text: 'Ultimo messaggio inviato',
-        img: 'img/avatar_2.jpg',
-      },
-      {
-        name: 'Michele',
-        text: 'Ultimo messaggio inviato',
-        img: 'img/avatar_2.jpg',
-      },
-      {
-        name: 'Michele',
-        text: 'Ultimo messaggio inviato',
-        img: 'img/avatar_2.jpg',
-      },
-      {
-        name: 'Michele',
-        text: 'Ultimo messaggio inviato',
-        img: 'img/avatar_2.jpg',
-      },
-      {
-        name: 'Michele',
-        text: 'Ultimo messaggio inviato',
-        img: 'img/avatar_2.jpg',
-      },
-      {
-        name: 'Michele',
-        text: 'Ultimo messaggio inviato',
-        img: 'img/avatar_2.jpg',
-      },
-      {
-        name: 'Michele',
-        text: 'Ultimo messaggio inviato',
-        img: 'img/avatar_2.jpg',
-      },
-      {
-        name: 'Michele',
-        text: 'Ultimo messaggio inviato',
-        img: 'img/avatar_2.jpg',
-      },
-      {
-        name: 'Michele',
-        text: 'Ultimo messaggio inviato',
-        img: 'img/avatar_2.jpg',
-      },
-      {
         name: 'Fabio',
         text: 'Ultimo messaggio inviato',
         img: 'img/avatar_3.jpg',

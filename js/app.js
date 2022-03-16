@@ -61,10 +61,14 @@ const app = new Vue({
     },
   },
   methods: {
-    filteredUsers() {
-      return this.users.filter((user) => {
-        return user.name.toLowerCase().includes(this.search.toLowerCase());
-      });
+    filteredUsers(search) {
+      if (search == '') {
+        return this.users;
+      } else {
+        return this.users.filter((user) => {
+          return user.name.toLowerCase().includes(this.search.toLowerCase());
+        });
+      }
     },
   },
 });

@@ -61,7 +61,8 @@
             <!-- chat aperte -->
             <div class="chats">
                 <ul>
-                    <li v-for="(user, index) in users" :key="index" onkeyup="filteredUser()" class="chatRow">
+                    <li v-for="(user, index) in filteredUsers(search)" :key="index" onkeyup="filteredUsers()"
+                        class="chatRow">
                         <div class="profileImg">
                             <img :src="users[index].img" alt="" srcset="">
                         </div>

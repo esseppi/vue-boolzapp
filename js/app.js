@@ -4,12 +4,12 @@ const app = new Vue({
     search: '',
     users: [
       {
-        name: 'michele',
+        name: 'Michele',
         text: 'Ultimo messaggio inviato',
         img: 'img/avatar_2.jpg',
       },
       {
-        name: 'fabio',
+        name: 'Fabio',
         text: 'Ultimo messaggio inviato',
         img: 'img/avatar_3.jpg',
       },
@@ -60,13 +60,11 @@ const app = new Vue({
       sub: 'Attiva notifiche desktop',
     },
   },
-  computed: {
-    computed: {
-      filteredUsers() {
-        return this.users.filter((user) => {
-          return user.type.toLowerCase().includes(this.search.toLowerCase());
-        });
-      },
+  methods: {
+    filteredUsers() {
+      return this.users.filter((user) => {
+        return user.name.toLowerCase().includes(this.search.toLowerCase());
+      });
     },
   },
 });

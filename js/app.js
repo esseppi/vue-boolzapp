@@ -122,10 +122,23 @@ const app = new Vue({
     },
     // invio messaggio
     sendMsg() {
-      this.users[this.activeIndex].messages.push({ ...this.newMsg });
+      if (this.newMsg == 0) {
+        console.log(newMsg);
+      } else {
+        this.users[this.activeIndex].messages.push({ ...this.newMsg });
+      }
+      this.scrollToBottom();
       this.newMsg.text = '';
       // chiamata risposta dopo un secondo
       setTimeout(this.reply, 1000);
+    },
+    scrollToBottom() {
+      const container = this.$el.querySelector('.textArea');
+      container.scrollTop = container.scrollHeight;
+    },
+    scrollToBottom() {
+      const container = this.$el.querySelector('.textArea');
+      container.scrollTop = container.scrollHeight;
     },
     // seleziona una chat da aprire
     selectedChat(key) {

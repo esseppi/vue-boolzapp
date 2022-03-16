@@ -4,9 +4,12 @@ const app = new Vue({
     activeIndex: 0,
     search: '',
     newMsg: {
-      date: '',
-      message: '',
+      text: '',
       sent: true,
+    },
+    replyMsg: {
+      text: 'Ok',
+      sent: false,
     },
     userLogged: {
       name: 'Salvatore',
@@ -19,6 +22,16 @@ const app = new Vue({
         name: 'Fabio',
         text: 'Ultimo messaggio inviato',
         img: 'img/avatar_3.jpg',
+        messages: [
+          {
+            text: 'Ciao prova a scrivere un messaggio!',
+            sent: true,
+          },
+          {
+            text: 'So rispondere solo: OK',
+            sent: false,
+          },
+        ],
       },
       {
         id: 1,
@@ -27,11 +40,11 @@ const app = new Vue({
         img: 'img/avatar_2.jpg',
         messages: [
           {
-            text: 'Lorem Lorem',
+            text: 'Ciao prova a scrivere un messaggio!',
             sent: true,
           },
           {
-            text: 'Lorem Lorem',
+            text: 'So rispondere solo: OK',
             sent: false,
           },
         ],
@@ -41,37 +54,56 @@ const app = new Vue({
         name: 'Alessandro L.',
         text: 'Ultimo messaggio inviato',
         img: 'img/avatar_4.jpg',
+        messages: [],
       },
       {
         id: 3,
         name: 'Alessandro B.',
         text: 'Ultimo messaggio inviato',
         img: 'img/avatar_8.jpg',
+        messages: [],
       },
       {
         id: 4,
         name: 'Claudia',
         text: 'Ultimo messaggio inviato',
         img: 'img/avatar_5.jpg',
+        messages: [],
       },
       {
         id: 5,
         name: 'Federico',
         text: 'Ultimo messaggio inviato',
         img: 'img/avatar_6.jpg',
+        messages: [],
       },
       {
         id: 6,
         name: 'Davide',
         text: 'Ultimo messaggio inviato',
         img: 'img/avatar_7.jpg',
+        messages: [],
+      },
+      {
+        id: 7,
+        name: 'Giulio',
+        text: 'Ultimo messaggio inviato',
+        img: 'img/avatar_2.jpg',
+        messages: [],
+      },
+      {
+        id: 8,
+        name: 'Claudio',
+        text: 'Ultimo messaggio inviato',
+        img: 'img/avatar_3.jpg',
+        messages: [],
       },
     ],
+    // dati notifica desktop
     deskNotify: {
       title: 'Ricevi notifiche di nuovi messaggi',
       sub: 'Attiva notifiche desktop',
     },
-    usersArray: [],
   },
   methods: {
     // filtro chat
@@ -84,12 +116,16 @@ const app = new Vue({
         });
       }
     },
-    postSentMessage(newMessage) {
-      console.log(...this.newMessage);
-      this.newMessage = '';
+    // risposta
+    reply() {
+      this.users[this.activeIndex].messages.push({ ...this.replyMsg });
     },
-    postMessage(newMessage) {
-      this.users[activeIndex].messages.push(newMessage);
+    // invio messaggio
+    sendMsg() {
+      this.users[this.activeIndex].messages.push({ ...this.newMsg });
+      this.newMsg.text = '';
+      // chiamata risposta dopo un secondo
+      setTimeout(this.reply, 1000);
     },
     // seleziona una chat da aprire
     selectedChat(key) {

@@ -83,7 +83,7 @@
                         <img :src="users[activeIndex].img" alt="" srcset="">
                     </div>
                     <div class="profileInfo">
-                        <span>{{ users[activeIndex].name }}</span>
+                        <p>{{ users[activeIndex].name }}</p>
                         <sub>{{ users[activeIndex].text }}</sub>
                     </div>
                 </div>
@@ -100,15 +100,17 @@
                 </div>
             </div>
             <div class="textArea">
-                <div v-for="message in users[activeIndex].messages " class="message"
+                <div v-for="message in users[activeIndex].messages" class="message"
                     :class="{'sent': message.sent, 'received': !message.sent}">
+
                     {{ message.text }}
+
                 </div>
             </div>
             <div class="newMsg">
                 <button><i class="far fa-smile"></i></button>
-                <input v-model="newMessage" @keyUp.enter="postSentMessage(newMessage)" type="text"
-                    placeholder="Scrivi un messagio">
+                <input v-model="newMsg.text" @keyUp.enter="sendMsg()" class="msg-input" type="text"
+                    placeholder="Scrivi un messaggio">
                 <button><i class="fas fa-microphone"></i></button>
             </div>
         </section>

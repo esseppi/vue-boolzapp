@@ -3,6 +3,15 @@
   margin: 0;
   padding: 0;
 }
+:root {
+  ---header-height: 70px;
+  ---deskNotify-height: 50px;
+  ---textInput-height: 35px;
+  ---chats-height: calc(
+    100% - var(---header-height) - var(---textInput-height) -
+      var(---deskNotify-height) - 10px
+  );
+}
 /* utilities */
 .beetwen {
   display: flex;
@@ -38,11 +47,11 @@ body {
 .heading {
   padding: 1%;
   background-color: #eaeaea;
-  height: 10%;
+  height: var(---header-height);
   width: 100%;
 }
 .headUtilities span {
-  margin: 3px 3px;
+  margin: 3px 6px;
 }
 /* adv desk notify */
 
@@ -59,17 +68,20 @@ body {
   height: 50px;
   width: 50px;
 }
+
 .profileInfo {
   display: flex;
   flex-direction: column;
+  vertical-align: middle;
+  justify-content: center;
 }
 .horizontal {
   display: flex;
   flex-direction: row;
 }
 .deskNotify {
-  height: 10%;
-  padding: 4px 3px;
+  height: var(---deskNotify-height);
+  padding: 3px;
   background-color: #8edafb;
 }
 .deskNotify .profileImg {
@@ -77,22 +89,25 @@ body {
   color: #8edafb;
   border-radius: 100px;
 }
-
+/* search chats */
 .filter {
-  height: 7%;
+  padding: 1% 1%;
   display: flex;
   font-size: 0.8rem;
   color: #b1b1b1;
+  background-color: #eaeaea;
   align-items: center;
 }
 
 .filter input {
   border: 0;
+  height: var(---textInput-height);
   width: calc(100% - 30px);
 }
 
 .filter button {
   border: 0;
+  height: var(---textInput-height);
   width: 30px;
   background-color: white;
   color: #b1b1b1;
@@ -101,7 +116,7 @@ body {
 /* chats */
 
 .chats {
-  height: 73%;
+  height: var(---chats-height);
 }
 .chats ul {
   padding: 0;
@@ -110,6 +125,7 @@ body {
 }
 
 li {
+  margin: 8px 0;
   padding: 1%;
   list-style: none;
   display: flex;
@@ -118,4 +134,38 @@ li {
 li:hover {
   background-color: #e9ebeb;
   cursor: pointer;
+}
+
+/* textarea */
+.textArea {
+  overflow-y: scroll;
+  height: calc(100% - 140px);
+  width: 100%;
+  background-image: url(../img/mine.jpg);
+  background-size: contain;
+}
+
+.newMsg {
+  padding: 0% 0;
+  height: 70px;
+  display: flex;
+  justify-content: space-around;
+  font-size: 0.8rem;
+  color: #b1b1b1;
+  background-color: #f3eee9;
+  align-items: center;
+}
+.newMsg input {
+  border-radius: 0.4rem;
+  border: 0;
+  height: 70%;
+  width: calc(90%);
+}
+
+.newMsg button {
+  border: 0;
+  height: 80%;
+  width: 30px;
+  background-color: #f3eee9;
+  color: #b1b1b1;
 }

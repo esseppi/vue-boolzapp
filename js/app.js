@@ -16,8 +16,8 @@ const app = new Vue({
   },
   methods: {
     fillArrays() {
-      userz.forEach((element) => {
-        this.usersArray.push(element);
+      users.forEach((user) => {
+        this.usersArray.push(user);
       });
     },
 

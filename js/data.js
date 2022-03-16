@@ -1,4 +1,4 @@
-const userz = [
+const users = [
   {
     name: 'Fabio',
     text: 'Ultimo messaggio inviato',

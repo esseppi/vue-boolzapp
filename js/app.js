@@ -1,55 +1,8 @@
 const app = new Vue({
   el: '#app',
   data: {
+    activeIndex: 0,
     search: '',
-    users: [
-      {
-        name: 'Michele',
-        text: 'Ultimo messaggio inviato',
-        img: 'img/avatar_2.jpg',
-      },
-      {
-        name: 'Fabio',
-        text: 'Ultimo messaggio inviato',
-        img: 'img/avatar_3.jpg',
-      },
-      {
-        name: 'Alessandro L.',
-        text: 'Ultimo messaggio inviato',
-        img: 'img/avatar_4.jpg',
-      },
-      {
-        name: 'Alessandro B.',
-        text: 'Ultimo messaggio inviato',
-        img: 'img/avatar_8.jpg',
-      },
-      {
-        name: 'Claudia',
-        text: 'Ultimo messaggio inviato',
-        img: 'img/avatar_5.jpg',
-      },
-      {
-        name: 'Federico',
-        text: 'Ultimo messaggio inviato',
-        img: 'img/avatar_6.jpg',
-      },
-      {
-        name: 'Davide',
-        text: 'Ultimo messaggio inviato',
-        img: 'img/avatar_7.jpg',
-      },
-      {
-        name: 'Davide',
-        text: 'Ultimo messaggio inviato',
-        img: 'img/avatar_7.jpg',
-      },
-      {
-        name: 'Davide',
-        text: 'Ultimo messaggio inviato',
-        img: 'img/avatar_7.jpg',
-      },
-    ],
-
     userLogged: {
       name: 'Sofia',
       text: 'Ultimo messaggio inviato',
@@ -59,16 +12,29 @@ const app = new Vue({
       title: 'Ricevi notifiche di nuovi messaggi',
       sub: 'Attiva notifiche desktop',
     },
+    usersArray: [],
   },
   methods: {
-    filteredUsers(search) {
+    fillArrays() {
+      userz.forEach((element) => {
+        this.usersArray.push(element);
+      });
+    },
+
+    filterUsers(search) {
       if (search == '') {
-        return this.users;
+        return this.usersArray;
       } else {
-        return this.users.filter((user) => {
-          return user.name.toLowerCase().includes(this.search.toLowerCase());
+        return this.usersArray.filter((user) => {
+          return user.name.toLowerCase().match(search.toLowerCase());
         });
       }
     },
+    selectedChat(index) {
+      this.activeIndex = index;
+    },
+  },
+  created() {
+    this.fillArrays();
   },
 });

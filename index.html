@@ -42,7 +42,7 @@
             <!-- attivare notifiche desktop -->
             <div class="deskNotify">
                 <div class="horizontal">
-                    <div class="profileImg">
+                    <div class="deskNotifyImg">
                         <i class="fas fa-bell-slash"></i>
                     </div>
                     <div class="profileInfo">
@@ -55,13 +55,13 @@
             <!-- ricerca chat -->
             <div class="filter">
                 <button id="btnFilter"><i class="fa-solid fa-magnifying-glass"></i></button>
-                <input type="text" id="input-filter" placeholder="Cerca o inizia una nuova chat">
+                <input v-model="search" type="text" id="input-filter" placeholder="Cerca o inizia una nuova chat">
             </div>
 
             <!-- chat aperte -->
             <div class="chats">
                 <ul>
-                    <li v-for="(task, index) in users" class="chatRow">
+                    <li v-for="(user, index) in filteredUsers" :key="index" onkeyup="filteredUser()" class="chatRow">
                         <div class="profileImg">
                             <img :src="users[index].img" alt="" srcset="">
                         </div>

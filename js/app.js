@@ -1,14 +1,15 @@
 const app = new Vue({
   el: '#app',
   data: {
+    search: '',
     users: [
       {
-        name: 'Michele',
+        name: 'michele',
         text: 'Ultimo messaggio inviato',
         img: 'img/avatar_2.jpg',
       },
       {
-        name: 'Fabio',
+        name: 'fabio',
         text: 'Ultimo messaggio inviato',
         img: 'img/avatar_3.jpg',
       },
@@ -48,6 +49,7 @@ const app = new Vue({
         img: 'img/avatar_7.jpg',
       },
     ],
+
     userLogged: {
       name: 'Sofia',
       text: 'Ultimo messaggio inviato',
@@ -56,6 +58,15 @@ const app = new Vue({
     deskNotify: {
       title: 'Ricevi notifiche di nuovi messaggi',
       sub: 'Attiva notifiche desktop',
+    },
+  },
+  computed: {
+    computed: {
+      filteredUsers() {
+        return this.users.filter((user) => {
+          return user.type.toLowerCase().includes(this.search.toLowerCase());
+        });
+      },
     },
   },
 });

@@ -9,7 +9,7 @@
   ---textInput-height: 35px;
   ---chats-height: calc(
     100% - var(---header-height) - var(---textInput-height) -
-      var(---deskNotify-height) - 10px
+      var(---deskNotify-height) - 20px
   );
 }
 /* utilities */
@@ -80,11 +80,15 @@ body {
   flex-direction: row;
 }
 .deskNotify {
-  height: var(---deskNotify-height);
   padding: 3px;
   background-color: #8edafb;
 }
-.deskNotify .profileImg {
+.deskNotifyImg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: var(---deskNotify-height);
+  width: var(---deskNotify-height);
   background-color: white;
   color: #8edafb;
   border-radius: 100px;

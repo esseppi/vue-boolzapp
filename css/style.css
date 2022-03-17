@@ -7,6 +7,7 @@
   ---header-height: 70px;
   ---deskNotify-height: 50px;
   ---textInput-height: 35px;
+  ---row-Height: 100% / 10;
   ---chats-height: calc(
     100% - var(---header-height) - var(---textInput-height) -
       var(---deskNotify-height) - 20px
@@ -122,6 +123,9 @@ body {
 
 .chats {
   height: var(---chats-height);
+}
+.chatRow {
+  height: var(---row-Height);
 }
 .chats ul {
   padding: 0;

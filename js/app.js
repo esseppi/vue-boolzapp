@@ -4,10 +4,12 @@ const app = new Vue({
     activeIndex: 0,
     search: '',
     newMsg: {
+      data: '',
       text: '',
       sent: true,
     },
     replyMsg: {
+      data: '',
       text: 'Ok',
       sent: false,
     },
@@ -122,19 +124,15 @@ const app = new Vue({
     },
     // invio messaggio
     sendMsg() {
-      if (this.newMsg == 0) {
-        console.log(newMsg);
-      } else {
-        this.users[this.activeIndex].messages.push({ ...this.newMsg });
-      }
+      if (this.newMsg.text.length < 1) return;
+      this.users[this.activeIndex].messages.push({ ...this.newMsg });
       this.scrollToBottom();
       this.newMsg.text = '';
       // chiamata risposta dopo un secondo
-      setTimeout(this.reply, 1000);
+      setTimeout(this.reply, 3000);
     },
-    scrollToBottom() {
-      const container = this.$el.querySelector('.textArea');
-      container.scrollTop = container.scrollHeight;
+    getSentTime(log) {
+      return dayjs(log.date).format('HH:mm');
     },
     scrollToBottom() {
       const container = this.$el.querySelector('.textArea');

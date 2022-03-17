@@ -55,7 +55,7 @@
             <!-- ricerca chat -->
             <div class="filter">
                 <button id="btnFilter"><i class="fa-solid fa-magnifying-glass"></i></button>
-                <input v-model.trim="search" type="text" class="input-text" placeholder="Cerca o inizia una nuova chat">
+                <input v-model="search" type="text" class="input-text" placeholder="Cerca o inizia una nuova chat">
             </div>
 
             <!-- RUBRICA CHAT APERTE SX -->
@@ -69,10 +69,10 @@
                         <div class="profileInfo">
                             <p>{{ user.name }}</p>
                             <span class="lastMsg">{{ user.text }}</span>
+                            <span class="lastLog">
+                                {{ format(user.lastLog) }}
+                            </span>
                         </div>
-                        <span class="lastMsg">
-                            {{ format(user.lastLog) }}
-                        </span>
                     </li>
                 </ul>
             </div>
@@ -106,12 +106,12 @@
             </div>
             <!-- AREA MESSAGGI -->
             <div class="textArea">
-                <div v-for="message in users[activeIndex].messages" class="message"
+                <div v-for="(message, messageIndex) in users[activeIndex].messages" class="message"
                     :class="{'sent': message.sent, 'received': !message.sent}">
-                    <div class="invisible">
+                    <div @click.prevent="isShow(message)" class="invisible">
                         <i class="fas fa-chevron-down"></i>
-                        <div class="infoDelete">
-                            <p>Elimina messaggio</p>
+                        <div class="infoDelete" :class="{'invisible': message.isShow}">
+                            <p @click="deleteMsg(messageIndex)">Elimina messaggio</p>
                         </div>
                     </div>
                     <p class="textMsg">{{ message.text }}</p>

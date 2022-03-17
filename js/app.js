@@ -7,11 +7,13 @@ const app = new Vue({
       date: '',
       text: '',
       sent: true,
+      isShow: true,
     },
     replyMsg: {
       date: '',
       text: 'Ok',
       sent: false,
+      isShow: true,
     },
     userLogged: {
       name: 'Salvatore',
@@ -31,11 +33,13 @@ const app = new Vue({
             date: '2022-02-17T03:11:57.000+01:00',
             text: 'Ciao prova a scrivere un messaggio!',
             sent: true,
+            isShow: true,
           },
           {
             date: '2022-02-17T09:09:57.000+01:00',
             text: 'So rispondere solo: OK',
             sent: false,
+            isShow: true,
           },
         ],
       },
@@ -50,11 +54,13 @@ const app = new Vue({
             date: '2022-02-17T03:11:57.000+01:00',
             text: 'Ciao usciamo?',
             sent: true,
+            isShow: true,
           },
           {
             date: '2022-02-17T09:09:57.000+01:00',
             text: 'Ci penso',
             sent: false,
+            isShow: true,
           },
         ],
       },
@@ -69,11 +75,13 @@ const app = new Vue({
             date: '2022-01-17T08:11:57.000+01:00',
             text: 'Ciao usciamo?',
             sent: true,
+            isShow: true,
           },
           {
             date: '2022-02-17T04:09:57.000+01:00',
             text: 'Non mi va',
             sent: false,
+            isShow: true,
           },
         ],
       },
@@ -88,11 +96,13 @@ const app = new Vue({
             date: '2022-02-17T03:11:57.000+01:00',
             text: 'Ciao usciamo?',
             sent: true,
+            isShow: true,
           },
           {
             date: '2022-02-17T09:09:57.000+01:00',
             text: 'Dove Andiamo?',
             sent: false,
+            isShow: true,
           },
         ],
       },
@@ -107,11 +117,13 @@ const app = new Vue({
             date: '2022-02-17T03:11:57.000+01:00',
             text: 'Ciao usciamo?',
             sent: true,
+            isShow: true,
           },
           {
             date: '2022-02-17T09:09:57.000+01:00',
             text: 'Va bene',
             sent: false,
+            isShow: true,
           },
         ],
       },
@@ -134,11 +146,13 @@ const app = new Vue({
             date: '2022-02-17T03:11:57.000+01:00',
             text: 'Ciao usciamo?',
             sent: true,
+            isShow: true,
           },
           {
             date: '2022-02-17T09:09:57.000+01:00',
             text: 'Non saprei',
             sent: false,
+            isShow: true,
           },
         ],
       },
@@ -183,30 +197,33 @@ const app = new Vue({
       }
     },
     // risposta
-    reply() {
+    reply(activeIndex) {
       let replyMsg = {
         date: luxon.DateTime.now().toISO().split('.')[0],
         text: 'ok',
         sent: false,
+        isShow: true,
       };
-      this.users[this.activeIndex].messages.push(replyMsg);
+      this.users[activeIndex].messages.push(replyMsg);
+      this.scrollToBottom();
     },
     // invio messaggio
-    sendMsg() {
+    sendMsg(activeIndex) {
       const activeChat = this.users[this.activeIndex];
       let newMsg = {
         date: luxon.DateTime.now().toISO().split('.')[0],
         text: activeChat.messages.text,
         sent: true,
+        isShow: true,
       };
       if (this.users[this.activeIndex].messages.text.length < 1) return;
       activeChat.messages.push(newMsg);
       this.users[this.activeIndex].messages.text = '';
-      this.scrollToBottom;
+      this.scrollToBottom();
       this.getLastMsg();
       this.getLastLog();
       // chiamata risposta dopo un secondo
-      setTimeout(this.reply, 1000);
+      setTimeout(this.reply, 3000, activeIndex);
     },
     scrollToBottom() {
       const container = this.$el.querySelector('.textArea');
@@ -243,8 +260,13 @@ const app = new Vue({
         i++;
       });
     },
-    isShow() {
-      this.isShow = true;
+    isShow(message) {
+      message.isShow = !message.isShow;
+    },
+    deleteMsg(messageIndex) {
+      this.users[this.activeIndex].messages.splice(messageIndex, 1);
+      this.getLastMsg();
+      this.getLastLog();
     },
   },
   created() {

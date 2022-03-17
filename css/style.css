@@ -228,6 +228,10 @@ li:hover {
   color: gray;
   font-size: small;
 }
+.lastLog {
+  color: gray;
+  font-size: x-small;
+}
 .textMsg {
   float: left;
 }
@@ -241,7 +245,6 @@ li:hover {
   display: block;
   cursor: pointer;
 }
-
 .message i {
   position: absolute;
   top: 0.2rem;
@@ -254,7 +257,6 @@ li:hover {
   left: 1.4rem;
 }
 .infoDelete {
-  display: none;
   padding: 0.3rem;
   background-color: white;
   border: 1px solid black;

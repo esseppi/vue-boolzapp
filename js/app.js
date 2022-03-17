@@ -216,7 +216,8 @@ const app = new Vue({
         sent: true,
         isShow: true,
       };
-      if (this.users[this.activeIndex].messages.text.length < 1) return;
+      let str = this.users[this.activeIndex].messages.text;
+      if (!str.replace(/\s/g, '').length) return;
       activeChat.messages.push(newMsg);
       this.users[this.activeIndex].messages.text = '';
       this.scrollToBottom();

@@ -18,12 +18,12 @@ const app = new Vue({
       text: 'Ultimo messaggio inviato',
       img: 'img/avatar_8.jpg',
     },
-    // lista dati
+    // lista utenti
     users: [
       {
         id: 0,
         name: 'Fabio',
-        text: 'Ultimo messaggio inviato',
+        text: '',
         img: 'img/avatar_3.jpg',
         messages: [
           {
@@ -41,7 +41,7 @@ const app = new Vue({
       {
         id: 1,
         name: 'Michele',
-        text: 'Ultimo messaggio inviato',
+        text: '',
         img: 'img/avatar_2.jpg',
         messages: [
           {
@@ -51,7 +51,7 @@ const app = new Vue({
           },
           {
             date: '2022-02-17T09:09:57.000+01:00',
-            text: 'So rispondere solo: OK',
+            text: 'Ci penso',
             sent: false,
           },
         ],
@@ -59,49 +59,93 @@ const app = new Vue({
       {
         id: 2,
         name: 'Alessandro L.',
-        text: 'Ultimo messaggio inviato',
+        text: '',
         img: 'img/avatar_4.jpg',
-        messages: [],
+        messages: [
+          {
+            date: '2022-01-17T08:11:57.000+01:00',
+            text: 'Ciao usciamo?',
+            sent: true,
+          },
+          {
+            date: '2022-02-17T04:09:57.000+01:00',
+            text: 'Non mi va',
+            sent: false,
+          },
+        ],
       },
       {
         id: 3,
         name: 'Alessandro B.',
-        text: 'Ultimo messaggio inviato',
+        text: '',
         img: 'img/avatar_8.jpg',
-        messages: [],
+        messages: [
+          {
+            date: '2022-02-17T03:11:57.000+01:00',
+            text: 'Ciao usciamo?',
+            sent: true,
+          },
+          {
+            date: '2022-02-17T09:09:57.000+01:00',
+            text: 'Dove Andiamo?',
+            sent: false,
+          },
+        ],
       },
       {
         id: 4,
         name: 'Claudia',
-        text: 'Ultimo messaggio inviato',
+        text: '',
         img: 'img/avatar_5.jpg',
-        messages: [],
+        messages: [
+          {
+            date: '2022-02-17T03:11:57.000+01:00',
+            text: 'Ciao usciamo?',
+            sent: true,
+          },
+          {
+            date: '2022-02-17T09:09:57.000+01:00',
+            text: 'Va bene',
+            sent: false,
+          },
+        ],
       },
       {
         id: 5,
         name: 'Federico',
-        text: 'Ultimo messaggio inviato',
+        text: '',
         img: 'img/avatar_6.jpg',
         messages: [],
       },
       {
         id: 6,
         name: 'Davide',
-        text: 'Ultimo messaggio inviato',
+        text: '',
         img: 'img/avatar_7.jpg',
-        messages: [],
+        messages: [
+          {
+            date: '2022-02-17T03:11:57.000+01:00',
+            text: 'Ciao usciamo?',
+            sent: true,
+          },
+          {
+            date: '2022-02-17T09:09:57.000+01:00',
+            text: 'Non saprei',
+            sent: false,
+          },
+        ],
       },
       {
         id: 7,
         name: 'Giulio',
-        text: 'Ultimo messaggio inviato',
+        text: '',
         img: 'img/avatar_2.jpg',
         messages: [],
       },
       {
         id: 8,
         name: 'Claudio',
-        text: 'Ultimo messaggio inviato',
+        text: '',
         img: 'img/avatar_3.jpg',
         messages: [],
       },
@@ -128,7 +172,7 @@ const app = new Vue({
       return luxon.DateTime.fromISO(date).toFormat(formattedDate);
     },
     // risposta
-    reply(activeIndex) {
+    reply() {
       let replyMsg = {
         date: luxon.DateTime.now().toISO().split('.')[0],
         text: 'ok',
@@ -144,12 +188,13 @@ const app = new Vue({
         text: activeChat.messages.text,
         sent: true,
       };
-      if (this.newMsg.text == undefined) return;
+      if (this.users[this.activeIndex].messages.text.length < 1) return;
       activeChat.messages.push(newMsg);
       this.users[this.activeIndex].messages.text = '';
       this.scrollToBottom();
       // chiamata risposta dopo un secondo
       setInterval(this.reply(), 2000);
+      this.getLastMsg();
     },
     scrollToBottom() {
       const container = this.$el.querySelector('.textArea');
@@ -159,5 +204,23 @@ const app = new Vue({
     selectedChat(key) {
       this.activeIndex = key;
     },
+    getLastMsg() {
+      this.users.forEach((user) => {
+        user.text = user.messages[user.messages.length - 1].text;
+      });
+    },
+    // makeId() {
+    //   for (let i = 0; i < users.length; i++) {
+    //     const user = array[i];
+    //     user.id += i;
+    //   }
+    // },
   },
+  created() {
+    this.getLastMsg();
+    // this.makeId();
+  },
+  // updated() {
+  //   this.getLastMsg();
+  // },
 });

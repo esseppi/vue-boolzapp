@@ -101,13 +101,17 @@
             </div>
             <div class="textArea">
                 <div v-for="message in users[activeIndex].messages" class="message"
-                    :class="{'sent': message.sent, 'received': !message.sent}">{{ message.text }}
+                    :class="{'sent': message.sent, 'received': !message.sent}">
+                    <p class="textMsg">
+                        {{ message.text }}
+                    </p>
+                    <span>{{ format(message.date) }}</span>
                 </div>
             </div>
             <div class="newMsg">
                 <button><i class="far fa-smile"></i></button>
-                <input v-model="newMsg.text" @keyUp.enter="sendMsg()" class="msg-input" type="text"
-                    placeholder="Scrivi un messaggio">
+                <input v-model="users[activeIndex].messages.text" @keyUp.enter="sendMsg(activeIndex)" class="msg-input"
+                    type="text" placeholder="Scrivi un messaggio">
                 <button><i class="fas fa-microphone"></i></button>
             </div>
         </section>

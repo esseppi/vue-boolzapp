@@ -4,12 +4,12 @@ const app = new Vue({
     activeIndex: 0,
     search: '',
     newMsg: {
-      data: '',
+      date: '',
       text: '',
       sent: true,
     },
     replyMsg: {
-      data: '',
+      date: '',
       text: 'Ok',
       sent: false,
     },
@@ -18,6 +18,7 @@ const app = new Vue({
       text: 'Ultimo messaggio inviato',
       img: 'img/avatar_8.jpg',
     },
+    // lista dati
     users: [
       {
         id: 0,
@@ -26,10 +27,12 @@ const app = new Vue({
         img: 'img/avatar_3.jpg',
         messages: [
           {
+            date: '2022-02-17T03:11:57.000+01:00',
             text: 'Ciao prova a scrivere un messaggio!',
             sent: true,
           },
           {
+            date: '2022-02-17T09:09:57.000+01:00',
             text: 'So rispondere solo: OK',
             sent: false,
           },
@@ -42,10 +45,12 @@ const app = new Vue({
         img: 'img/avatar_2.jpg',
         messages: [
           {
-            text: 'Ciao prova a scrivere un messaggio!',
+            date: '2022-02-17T03:11:57.000+01:00',
+            text: 'Ciao usciamo?',
             sent: true,
           },
           {
+            date: '2022-02-17T09:09:57.000+01:00',
             text: 'So rispondere solo: OK',
             sent: false,
           },
@@ -118,21 +123,33 @@ const app = new Vue({
         });
       }
     },
+    format(date) {
+      let formattedDate = 'dd/MM/yyyy';
+      return luxon.DateTime.fromISO(date).toFormat(formattedDate);
+    },
     // risposta
-    reply() {
-      this.users[this.activeIndex].messages.push({ ...this.replyMsg });
+    reply(activeIndex) {
+      let replyMsg = {
+        date: luxon.DateTime.now().toISO().split('.')[0],
+        text: 'ok',
+        sent: false,
+      };
+      this.users[this.activeIndex].messages.push(replyMsg);
     },
     // invio messaggio
     sendMsg() {
-      if (this.newMsg.text.length < 1) return;
-      this.users[this.activeIndex].messages.push({ ...this.newMsg });
+      const activeChat = this.users[this.activeIndex];
+      let newMsg = {
+        date: luxon.DateTime.now().toISO().split('.')[0],
+        text: activeChat.messages.text,
+        sent: true,
+      };
+      if (this.newMsg.text == undefined) return;
+      activeChat.messages.push(newMsg);
+      this.users[this.activeIndex].messages.text = '';
       this.scrollToBottom();
-      this.newMsg.text = '';
       // chiamata risposta dopo un secondo
-      setTimeout(this.reply, 3000);
-    },
-    getSentTime(log) {
-      return dayjs(log.date).format('HH:mm');
+      setInterval(this.reply(), 2000);
     },
     scrollToBottom() {
       const container = this.$el.querySelector('.textArea');

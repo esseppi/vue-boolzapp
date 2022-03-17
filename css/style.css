@@ -188,7 +188,8 @@ li:hover {
   max-width: 80%;
   border-radius: 2rem;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-around;
   align-items: center;
 }
 .message.sent {

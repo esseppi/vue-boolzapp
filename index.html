@@ -46,8 +46,8 @@
                         <i class="fas fa-bell-slash"></i>
                     </div>
                     <div class="profileInfo">
-                        <span>{{ deskNotify.title }}</span>
-                        <sub>{{ deskNotify.sub }}</sub>
+                        <p class="notifyTitle">{{ deskNotify.title }}</p>
+                        <p class="notifySub"><a href="">{{ deskNotify.sub }}</a></p>
                     </div>
                 </div>
             </div>
@@ -55,10 +55,10 @@
             <!-- ricerca chat -->
             <div class="filter">
                 <button id="btnFilter"><i class="fa-solid fa-magnifying-glass"></i></button>
-                <input v-model.trim="search" type="text" id="input-filter" placeholder="Cerca o inizia una nuova chat">
+                <input v-model.trim="search" type="text" class="input-text" placeholder="Cerca o inizia una nuova chat">
             </div>
 
-            <!-- chat aperte -->
+            <!-- RUBRICA CHAT APERTE SX -->
             <div class="chats">
                 <ul>
                     <li v-for="(user, index) in filterUsers(search)" :key="user.id" @click="selectedChat(user.id)"
@@ -70,21 +70,26 @@
                             <p>{{ user.name }}</p>
                             <span class="lastMsg">{{ user.text }}</span>
                         </div>
+                        <span class="lastMsg">
+                            {{ format(user.lastLog) }}
+                        </span>
                     </li>
                 </ul>
             </div>
         </section>
 
-        <!-- sezione destra textarea -->
+        <!-- sezione destra textarea DX-->
         <section class="rightSide">
+            <!-- HEADING OPEN CHAT  DX-->
             <div class="heading beetwen">
                 <div class="beetwen">
                     <div class="profileImg">
                         <img :src="users[activeIndex].img" alt="" srcset="">
                     </div>
+                    <!-- user openchat info DX -->
                     <div class="profileInfo">
                         <p>{{ users[activeIndex].name }}</p>
-                        <sub>{{ users[activeIndex].text }}</sub>
+                        <sub>{{format(users[activeIndex].lastLog) }}</sub>
                     </div>
                 </div>
                 <div class="headUtilities">
@@ -99,16 +104,25 @@
                     </button>
                 </div>
             </div>
+            <!-- AREA MESSAGGI -->
             <div class="textArea">
                 <div v-for="message in users[activeIndex].messages" class="message"
                     :class="{'sent': message.sent, 'received': !message.sent}">
+                    <div class="invisible">
+                        <i class="fas fa-chevron-down"></i>
+                        <div class="infoDelete">
+                            <p>Elimina messaggio</p>
+                        </div>
+                    </div>
                     <p class="textMsg">{{ message.text }}</p>
                     <p class="dateMsg">{{ format(message.date) }}</p>
+
                 </div>
             </div>
+            <!-- inserimento nuovi messaggi -->
             <div class="newMsg">
                 <button><i class="far fa-smile"></i></button>
-                <input v-model="users[activeIndex].messages.text" @keyUp.enter="sendMsg(activeIndex)" class="msg-input"
+                <input v-model="users[activeIndex].messages.text" @keyUp.enter="sendMsg(activeIndex)" class="input-text"
                     type="text" placeholder="Scrivi un messaggio">
                 <button><i class="fas fa-microphone"></i></button>
             </div>

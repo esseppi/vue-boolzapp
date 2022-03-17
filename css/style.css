@@ -59,6 +59,8 @@ body {
 
 /* immagini del profilo */
 .profileImg img {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
   height: 100%;
   width: 100%;
   border-radius: 100px;
@@ -72,6 +74,7 @@ body {
 }
 
 .profileInfo {
+  margin-left: 0.5rem;
   display: flex;
   flex-direction: column;
   vertical-align: middle;
@@ -86,6 +89,7 @@ body {
   background-color: #8edafb;
 }
 .deskNotifyImg {
+  margin: 0.2rem 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -96,6 +100,12 @@ body {
   border-radius: 100px;
 }
 /* search chats */
+.notifyTitle {
+  font-size: 0.9rem;
+}
+.notifySub {
+  font-size: 0.7rem;
+}
 .filter {
   padding: 1% 1%;
   display: flex;
@@ -110,7 +120,9 @@ body {
   height: var(---textInput-height);
   width: calc(100% - 30px);
 }
-
+.input-text {
+  padding: 0 8px;
+}
 .filter button {
   border: 0;
   height: var(---textInput-height);
@@ -189,6 +201,7 @@ li:hover {
   max-width: 80%;
   border-radius: 1rem;
   display: flex;
+  position: relative;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
@@ -217,4 +230,36 @@ li:hover {
 }
 .textMsg {
   float: left;
+}
+.invisible {
+  display: none;
+}
+.visible {
+  display: block;
+}
+.message:hover > .invisible {
+  display: block;
+  cursor: pointer;
+}
+
+.message i {
+  position: absolute;
+  top: 0.2rem;
+  height: 1rem;
+}
+.sent i {
+  right: 1.4rem;
+}
+.received i {
+  left: 1.4rem;
+}
+.infoDelete {
+  display: none;
+  padding: 0.3rem;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 0.1rem;
+  position: absolute;
+  top: 1.4rem;
+  right: 1.4rem;
 }

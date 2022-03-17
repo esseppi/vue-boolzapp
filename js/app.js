@@ -24,6 +24,7 @@ const app = new Vue({
         id: 0,
         name: 'Fabio',
         text: '',
+        lastLog: '',
         img: 'img/avatar_3.jpg',
         messages: [
           {
@@ -42,6 +43,7 @@ const app = new Vue({
         id: 1,
         name: 'Michele',
         text: '',
+        lastLog: '',
         img: 'img/avatar_2.jpg',
         messages: [
           {
@@ -60,6 +62,7 @@ const app = new Vue({
         id: 2,
         name: 'Alessandro L.',
         text: '',
+        lastLog: '',
         img: 'img/avatar_4.jpg',
         messages: [
           {
@@ -78,6 +81,7 @@ const app = new Vue({
         id: 3,
         name: 'Alessandro B.',
         text: '',
+        lastLog: '',
         img: 'img/avatar_8.jpg',
         messages: [
           {
@@ -96,6 +100,7 @@ const app = new Vue({
         id: 4,
         name: 'Claudia',
         text: '',
+        lastLog: '',
         img: 'img/avatar_5.jpg',
         messages: [
           {
@@ -114,6 +119,7 @@ const app = new Vue({
         id: 5,
         name: 'Federico',
         text: '',
+        lastLog: '',
         img: 'img/avatar_6.jpg',
         messages: [],
       },
@@ -121,6 +127,7 @@ const app = new Vue({
         id: 6,
         name: 'Davide',
         text: '',
+        lastLog: '',
         img: 'img/avatar_7.jpg',
         messages: [
           {
@@ -139,6 +146,7 @@ const app = new Vue({
         id: 7,
         name: 'Giulio',
         text: '',
+        lastLog: '',
         img: 'img/avatar_2.jpg',
         messages: [],
       },
@@ -146,6 +154,7 @@ const app = new Vue({
         id: 8,
         name: 'Claudio',
         text: '',
+        lastLog: '',
         img: 'img/avatar_3.jpg',
         messages: [],
       },
@@ -168,8 +177,10 @@ const app = new Vue({
       }
     },
     format(date) {
-      let formattedDate = 'dd/MM/yyyy';
-      return luxon.DateTime.fromISO(date).toFormat(formattedDate);
+      let formattedDate = 'dd/MM/yyyy hh:mm';
+      if (date != '') {
+        return luxon.DateTime.fromISO(date).toFormat(formattedDate);
+      }
     },
     // risposta
     reply() {
@@ -191,10 +202,11 @@ const app = new Vue({
       if (this.users[this.activeIndex].messages.text.length < 1) return;
       activeChat.messages.push(newMsg);
       this.users[this.activeIndex].messages.text = '';
-      this.scrollToBottom();
-      // chiamata risposta dopo un secondo
-      setInterval(this.reply(), 2000);
+      this.scrollToBottom;
       this.getLastMsg();
+      this.getLastLog();
+      // chiamata risposta dopo un secondo
+      setTimeout(this.reply, 1000);
     },
     scrollToBottom() {
       const container = this.$el.querySelector('.textArea');
@@ -206,21 +218,41 @@ const app = new Vue({
     },
     getLastMsg() {
       this.users.forEach((user) => {
-        user.text = user.messages[user.messages.length - 1].text;
+        if (user.messages.length < 1) {
+          user.text = '';
+        } else {
+          user.text = user.messages[user.messages.length - 1].text;
+        }
       });
     },
-    // makeId() {
-    //   for (let i = 0; i < users.length; i++) {
-    //     const user = array[i];
-    //     user.id += i;
-    //   }
-    // },
+    getLastLog() {
+      this.users.forEach((user) => {
+        if (
+          user.messages.length < 1 ||
+          user.messages[user.messages.length - 1].date == undefined
+        ) {
+          user.lastLog = '';
+        } else {
+          user.lastLog = user.messages[user.messages.length - 1].date;
+        }
+      });
+    },
+    makeId() {
+      this.users.forEach((user, i) => {
+        user.id = i;
+        i++;
+      });
+    },
+    isShow() {
+      this.isShow = true;
+    },
   },
   created() {
     this.getLastMsg();
-    // this.makeId();
+    this.getLastLog();
+    this.makeId();
   },
-  // updated() {
-  //   this.getLastMsg();
-  // },
+  updated() {
+    this.getLastMsg();
+  },
 });

@@ -267,6 +267,8 @@ const app = new Vue({
     // seleziona una chat da aprire
     selectedChat(key) {
       this.activeIndex = key;
+      console.log(key);
+      console.log(this.activeIndex);
     },
     // recupero ultimo messaggio in una chat
     getLastMsg() {
@@ -303,6 +305,7 @@ const app = new Vue({
       this.users.forEach((user, i) => {
         user.id = i;
         i++;
+        console.log(i);
       });
     },
     // menu eliminazione messaggio singolo
@@ -325,11 +328,12 @@ const app = new Vue({
     deleteThisChat() {
       this.users[this.activeIndex].isShow =
         !this.users[this.activeIndex].isShow;
-      if (this.activeIndex == this.users.length - 1) {
-        activeIndex = this.activeIndex--;
-      } else if (this.activeIndex < this.users.length - 1) {
-        activeIndex = this.activeIndex++;
-      }
+      this.activeIndex = 0;
+      // if (this.activeIndex == this.users.length - 1) {
+      //   activeIndex = this.activeIndex--;
+      // } else if (this.activeIndex < this.users.length - 1) {
+      //   activeIndex = this.activeIndex++;
+      // }
     },
     // eliminazione tutta chat
     toggleInvisible() {
@@ -345,8 +349,5 @@ const app = new Vue({
     this.getLastMsg();
     this.getLastLog();
     this.makeId();
-  },
-  updated() {
-    this.getLastMsg();
   },
 });

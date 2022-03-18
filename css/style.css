@@ -23,7 +23,8 @@
 body {
   height: 100vh;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-self: center;
   justify-content: center;
   background: linear-gradient(#009688 0 20%, #d9dbd5 20% 100%);
 }
@@ -76,6 +77,7 @@ body {
 .profileInfo {
   margin-left: 0.5rem;
   display: flex;
+  font-size: 1em;
   flex-direction: column;
   vertical-align: middle;
   justify-content: center;
@@ -284,4 +286,40 @@ button {
   position: absolute;
   top: 1rem;
   right: 1rem;
+}
+
+/* RESPONSIVE */
+/* RESPONSIVE */
+@media screen and (min-width: 561px) {
+  .leftSide {
+    min-width: 230px;
+  }
+}
+@media screen and (max-width: 560px) {
+  .leftSide {
+    min-width: none;
+  }
+  .rightSide {
+    width: 100%;
+  }
+  .chatRow,
+  .leftSide .beetwen {
+    display: flex;
+    flex-direction: column;
+  }
+  .chatRow .profileImg {
+    align-self: center;
+  }
+  .chatRow .profileInfo {
+    margin: 0;
+    text-align: center;
+  }
+  .leftSide .headUtilities,
+  .rightSide .headUtilities .fa-search,
+  .rightSide .headUtilities .fa-paperclip,
+  .chats .profileInfo .lastLog,
+  .chats .profileInfo .lastMsg,
+  .deskNotify {
+    display: none;
+  }
 }

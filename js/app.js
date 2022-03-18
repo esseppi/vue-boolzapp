@@ -5,6 +5,8 @@ const app = new Vue({
     deleteAllChat: false,
     addChatShow: false,
     search: '',
+    newImg: '',
+    newName: '',
     userLogged: {
       name: 'Salvatore',
       text: 'Ultimo messaggio inviato',
@@ -309,6 +311,7 @@ const app = new Vue({
       this.users[this.activeIndex].isShow =
         !this.users[this.activeIndex].isShow;
       activeIndex = this.activeIndex++;
+      activeIndex = this.activeIndex--;
     },
     // eliminazione tutta chat
     toggleInvisible() {

@@ -14,9 +14,9 @@
 
 <body>
     <main id="app">
-        <!-- sezione sinistra contatti -->
+        <!-- sezione contatti SX-->
         <section class="leftSide">
-            <!-- profilo loggato -->
+            <!-- profilo loggato heading SX-->
             <div class="heading beetwen">
                 <div class="beetwen">
                     <div class="profileImg">
@@ -27,18 +27,11 @@
                     </div>
                 </div>
                 <div class="headUtilities">
-                    <button>
-                        <i class="fas fa-circle-notch"></i>
-                    </button>
-                    <button>
-                        <i class="fas fa-comment-alt"></i>
-                    </button>
-                    <button>
-                        <i class="fas fa-ellipsis-v"></i>
-                    </button>
+                    <button><i class="fas fa-circle-notch"></i></button>
+                    <button><i class="fas fa-comment-alt"></i></button>
+                    <button><i class="fas fa-ellipsis-v"></i></button>
                 </div>
             </div>
-
             <!-- attivare notifiche desktop -->
             <div class="deskNotify">
                 <div class="horizontal">
@@ -51,13 +44,11 @@
                     </div>
                 </div>
             </div>
-
-            <!-- ricerca chat -->
+            <!-- ricerca chat SX -->
             <div class="filter">
                 <button id="btnFilter"><i class="fa-solid fa-magnifying-glass"></i></button>
                 <input v-model="search" type="text" class="input-text" placeholder="Cerca o inizia una nuova chat">
             </div>
-
             <!-- RUBRICA CHAT APERTE SX -->
             <div class="chats">
                 <ul>
@@ -99,12 +90,9 @@
                     </div>
                 </div>
                 <div class="headUtilities">
-                    <button>
-                        <i class="fas fa-search"></i>
-                    </button>
-                    <button>
-                        <i class="fas fa-paperclip"></i>
-                    </button>
+                    <button><i class="fas fa-search"></i></button>
+                    <button><i class="fas fa-paperclip"></i></button>
+                    <!-- ELIMINAZIONE CHAT O MESSAGGI DENTRO LA CHAT -->
                     <button @click="toggleInvisible()">
                         <i class="fas fa-ellipsis-v"></i>
                         <div class="deleteAllChat" v-show="deleteAllChat">

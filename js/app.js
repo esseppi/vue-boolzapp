@@ -1,18 +1,7 @@
 const app = new Vue({
   el: '#app',
   data: {
-    activeIndex: 0,
-    deleteAllChat: false,
-    addChatShow: false,
-    search: '',
-    newImg: '',
-    newName: '',
-    userLogged: {
-      name: 'Salvatore',
-      text: 'Ultimo messaggio inviato',
-      img: 'img/avatar_8.jpg',
-    },
-    // lista utenti
+    // LISTA CONTATTI
     users: [
       {
         id: '',
@@ -174,10 +163,34 @@ const app = new Vue({
         messages: [],
       },
     ],
-    // dati notifica desktop
+    // indice di selezione chat
+    activeIndex: 0,
+    // interruttori visibilità
+    deleteAllChat: false,
+    addChatShow: false,
+    // dichiarazione variabili da usare nei metodi
+    search: '',
+    newImg: '',
+    newName: '',
+    // dati da inserire nel DOM
     deskNotify: {
       title: 'Ricevi notifiche di nuovi messaggi',
       sub: 'Attiva notifiche desktop',
+    },
+    // frasi di risposta random
+    randomSentences: [
+      'ciao bello di papà',
+      'come stai?',
+      'è da molto che non ci sentiamo',
+      'mi manchi pure tu',
+      'bello esco',
+      'tu non esci?',
+    ],
+    // user loggato
+    userLogged: {
+      name: 'Salvatore',
+      text: 'Ultimo messaggio inviato',
+      img: 'img/avatar_8.jpg',
     },
   },
   methods: {
@@ -198,13 +211,15 @@ const app = new Vue({
       this.getLastLog();
       setTimeout(this.scrollToBottomMsg, 100);
       // chiamata risposta dopo un secondo
-      setTimeout(this.reply, 3000, activeIndex);
+      setTimeout(this.reply, 1000, activeIndex);
     },
     // risposta automatica chiamata ad ogni sendMsg() nella chat indicizzata in QUEL momento
     reply(activeIndex) {
       let replyMsg = {
         date: luxon.DateTime.now().toISO().split('.')[0],
-        text: 'ok',
+        text: this.randomSentences[
+          Math.floor(Math.random() * this.randomSentences.length)
+        ],
         sent: false,
         isShow: true,
       };

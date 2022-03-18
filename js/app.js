@@ -312,7 +312,6 @@ const app = new Vue({
     // menu eliminazione messaggio singolo
     isShow(message) {
       message.isShow = !message.isShow;
-      setTimeout(this.isShow, 5000, message);
     },
     // eliminazione messaggio singolo
     deleteMsg(messageIndex) {
@@ -330,12 +329,11 @@ const app = new Vue({
     deleteThisChat() {
       this.users[this.activeIndex].isShow =
         !this.users[this.activeIndex].isShow;
-      this.activeIndex = 0;
-      // if (this.activeIndex == this.users.length - 1) {
-      //   activeIndex = this.activeIndex--;
-      // } else if (this.activeIndex < this.users.length - 1) {
-      //   activeIndex = this.activeIndex++;
-      // }
+      if (this.activeIndex == this.users.length - 1) {
+        activeIndex = this.activeIndex--;
+      } else if (this.activeIndex < this.users.length - 1) {
+        activeIndex = this.activeIndex++;
+      }
     },
     // eliminazione tutta chat
     toggleInvisible() {

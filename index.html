@@ -14,6 +14,7 @@
 
 <body>
     <main id="app">
+
         <!-- sezione contatti SX-->
         <section class="leftSide">
             <!-- profilo loggato heading SX-->
@@ -90,7 +91,7 @@
                         <span class="lastLog">{{format(users[activeIndex].lastLog) }}</span>
                     </div>
                 </div>
-                <div @click="toggleInvisible()" @mouseleave="toggleInvisible()" class="headUtilities">
+                <div @click="toggleInvisible()" class="headUtilities">
                     <button><i class="fas fa-search"></i></button>
                     <button><i class="fas fa-paperclip"></i></button>
                     <!-- ELIMINAZIONE CHAT O MESSAGGI DENTRO LA CHAT -->

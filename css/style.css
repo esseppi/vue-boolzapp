@@ -166,6 +166,7 @@ li {
   display: flex;
 }
 
+.deleteAllChat p:hover,
 li:hover {
   background-color: #e9ebeb;
   cursor: pointer;

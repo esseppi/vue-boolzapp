@@ -61,7 +61,7 @@
             <!-- RUBRICA CHAT APERTE SX -->
             <div class="chats">
                 <ul>
-                    <div @click="showAddContact" class="addChat"><i class="fas fa-plus"></i></div>
+                    <div @click="showAddContact" class="addChat"><button><i class="fas fa-plus"></i></button></div>
                     <div v-show="addChatShow" class="infoDelete">
                         <input type="text" v-model="newName" placeholder="Inserisci il nome del contatto">
                         <br>
@@ -69,8 +69,8 @@
                             placeholder="Inserisci la foto del contatto">
                         <button @click="addChat()"><i class="fas fa-plus"></i></button>
                     </div>
-                    <li v-for="(user, index) in filterUsers(search)" :key="user.id" @click="selectedChat(user.id)"
-                        class="chatRow">
+                    <li v-for="(user, index) in filterUsers(search)" :key="user.id" v-show="user.isShow"
+                        @click="selectedChat(user.id)" class="chatRow">
                         <div class="profileImg">
                             <img :src="user.img" alt="" srcset="">
                         </div>
@@ -107,7 +107,9 @@
                     </button>
                     <button @click="toggleInvisible()">
                         <i class="fas fa-ellipsis-v"></i>
-                        <div class="deleteAllChat" @click="deleteAllMsg()" v-show="deleteAllChat">Delete this whole chat
+                        <div class="deleteAllChat" v-show="deleteAllChat">
+                            <p @click="deleteAllMsg()">Delete this whole chat</p>
+                            <p @click="deleteThisChat()">Delete this Conversationt</p>
                         </div>
                     </button>
                 </div>

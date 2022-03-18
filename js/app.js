@@ -13,7 +13,8 @@ const app = new Vue({
     // lista utenti
     users: [
       {
-        id: 0,
+        id: '',
+        isShow: true,
         name: 'Fabio',
         text: '',
         lastLog: '',
@@ -35,6 +36,7 @@ const app = new Vue({
       },
       {
         id: '',
+        isShow: true,
         name: 'Michele',
         text: '',
         lastLog: '',
@@ -56,6 +58,7 @@ const app = new Vue({
       },
       {
         id: '',
+        isShow: true,
         name: 'Alessandro L.',
         text: '',
         lastLog: '',
@@ -77,6 +80,7 @@ const app = new Vue({
       },
       {
         id: '',
+        isShow: true,
         name: 'Alessandro B.',
         text: '',
         lastLog: '',
@@ -98,6 +102,7 @@ const app = new Vue({
       },
       {
         id: '',
+        isShow: true,
         name: 'Claudia',
         text: '',
         lastLog: '',
@@ -119,6 +124,7 @@ const app = new Vue({
       },
       {
         id: '',
+        isShow: true,
         name: 'Federico',
         text: '',
         lastLog: '',
@@ -127,6 +133,7 @@ const app = new Vue({
       },
       {
         id: '',
+        isShow: true,
         name: 'Davide',
         text: '',
         lastLog: '',
@@ -148,6 +155,7 @@ const app = new Vue({
       },
       {
         id: '',
+        isShow: true,
         name: 'Giulio',
         text: '',
         lastLog: '',
@@ -156,6 +164,7 @@ const app = new Vue({
       },
       {
         id: '',
+        isShow: true,
         name: 'Claudio',
         text: '',
         lastLog: '',
@@ -170,34 +179,6 @@ const app = new Vue({
     },
   },
   methods: {
-    // filtro chat agendo direttamente sull'object 'users'
-    filterUsers(search) {
-      if (search == '') {
-        return this.users;
-      } else {
-        return this.users.filter((user) => {
-          return user.name.toLowerCase().match(search.toLowerCase());
-        });
-      }
-    },
-    // modifico la data nel formato richiesto
-    format(date) {
-      let formattedDate = 'dd/MM/yyyy hh:mm';
-      if (date != '') {
-        return luxon.DateTime.fromISO(date).toFormat(formattedDate);
-      }
-    },
-    // risposta automatica chiamata ad ogni sendMsg() nella chat indicizzata in QUEL momento
-    reply(activeIndex) {
-      let replyMsg = {
-        date: luxon.DateTime.now().toISO().split('.')[0],
-        text: 'ok',
-        sent: false,
-        isShow: true,
-      };
-      this.users[activeIndex].messages.push(replyMsg);
-      this.scrollToBottom();
-    },
     // invio messaggio e lo inserisco nell'object della chat indicizzata
     sendMsg(activeIndex) {
       const activeChat = this.users[this.activeIndex];
@@ -211,16 +192,60 @@ const app = new Vue({
       if (!str.replace(/\s/g, '').length) return;
       activeChat.messages.push(newMsg);
       this.users[this.activeIndex].messages.text = '';
-      this.scrollToBottom();
       this.getLastMsg();
       this.getLastLog();
+      setTimeout(this.scrollToBottomMsg, 100);
       // chiamata risposta dopo un secondo
       setTimeout(this.reply, 3000, activeIndex);
     },
+    // risposta automatica chiamata ad ogni sendMsg() nella chat indicizzata in QUEL momento
+    reply(activeIndex) {
+      let replyMsg = {
+        date: luxon.DateTime.now().toISO().split('.')[0],
+        text: 'ok',
+        sent: false,
+        isShow: true,
+      };
+      this.users[activeIndex].messages.push(replyMsg);
+      this.scrollToBottomMsg();
+    },
+    // aggiungo nuovo contatto/chat
+    addChat() {
+      let newUser = {
+        id: this.users.length,
+        isShow: true,
+        name: this.newName,
+        text: '',
+        lastLog: '',
+        img: this.newImg,
+        messages: [],
+      };
+      if (this.newName.replace(/\s/g, '').length && this.newName != undefined) {
+        this.users.push(newUser);
+        this.showAddContact();
+        this.newName = '';
+        this.newImg = '';
+      } else return;
+      setTimeout(this.scrollToBottomContact, 100);
+    },
+    // filtro chat agendo direttamente sull'object 'users'
+    filterUsers(search) {
+      if (search == '') {
+        return this.users;
+      } else {
+        return this.users.filter((user) => {
+          return user.name.toLowerCase().match(search.toLowerCase());
+        });
+      }
+    },
     // scrolla verso il basso tutte le chat, è chiamata ad ogni nuovo sendMsg()
-    scrollToBottom() {
+    scrollToBottomMsg() {
       const container = this.$el.querySelector('.textArea');
       container.scrollTop = container.scrollHeight;
+    }, // scrolla verso il basso tutte le chat, è chiamata ad ogni nuovo sendMsg()
+    scrollToBottomContact() {
+      let containers = this.$el.querySelector('ul');
+      containers.scrollTop = containers.scrollHeight;
     },
     // seleziona una chat da aprire
     selectedChat(key) {
@@ -249,6 +274,13 @@ const app = new Vue({
         }
       });
     },
+    // modifico la data nel formato richiesto
+    format(date) {
+      let formattedDate = 'dd/MM/yyyy hh:mm';
+      if (date != '') {
+        return luxon.DateTime.fromISO(date).toFormat(formattedDate);
+      }
+    },
     // generazione automatica di un id per ogni contatto
     makeId() {
       this.users.forEach((user, i) => {
@@ -266,11 +298,17 @@ const app = new Vue({
       this.getLastMsg();
       this.getLastLog();
     },
-    // menu eliminazione tutta chat
+    // menu eliminazione tutti i messaggi in chat
     deleteAllMsg() {
       this.users[this.activeIndex].messages = [];
       this.getLastMsg();
       this.getLastLog();
+    },
+    // eliminazione della chat corrente
+    deleteThisChat() {
+      this.users[this.activeIndex].isShow =
+        !this.users[this.activeIndex].isShow;
+      activeIndex = this.activeIndex++;
     },
     // eliminazione tutta chat
     toggleInvisible() {
@@ -279,28 +317,6 @@ const app = new Vue({
     // visibilità input per aggiunta nuova chat
     showAddContact() {
       this.addChatShow = !this.addChatShow;
-    },
-
-    // aggiungo nuovo contatto/chat
-    addChat() {
-      if (this.newImg == '' || this.newImg != undefined) {
-        this.newImg = 'https://picsum.photos/seed/picsum/200/300';
-      }
-      console.log(this.newImg);
-      let newUser = {
-        id: this.users.length,
-        name: this.newName,
-        text: '',
-        lastLog: '',
-        img: this.newImg,
-        messages: [],
-      };
-      if (this.newName.replace(/\s/g, '').length && this.newName != undefined) {
-        this.users.push(newUser);
-        this.showAddContact();
-      } else return;
-      this.newName = '';
-      this.newImg = '';
     },
   },
   // recupero ultimi mesaggi e ultimi log al caricamento della pagina

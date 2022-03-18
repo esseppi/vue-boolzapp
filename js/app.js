@@ -168,6 +168,7 @@ const app = new Vue({
     // interruttori visibilità
     deleteAllChat: false,
     addChatShow: false,
+    showAddContact: 0,
     // dichiarazione variabili da usare nei metodi
     search: '',
     newImg: '',

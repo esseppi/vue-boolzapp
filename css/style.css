@@ -60,13 +60,19 @@ body {
 
 /* immagini del profilo */
 .profileImg img {
+  object-fit: cover;
   margin-left: 0.5rem;
   margin-right: 0.5rem;
   height: 100%;
   width: 100%;
   border-radius: 100px;
 }
+.chats .profileImg {
+  outline: solid 1px;
+  border-radius: 1rem;
+}
 .profileImg {
+  object-fit: cover;
   display: flex;
   justify-content: center;
   align-items: center;

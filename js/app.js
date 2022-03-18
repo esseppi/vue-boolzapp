@@ -312,6 +312,7 @@ const app = new Vue({
     // menu eliminazione messaggio singolo
     isShow(message) {
       message.isShow = !message.isShow;
+      setTimeout(this.isShow, 5000, message);
     },
     // eliminazione messaggio singolo
     deleteMsg(messageIndex) {

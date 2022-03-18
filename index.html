@@ -90,11 +90,11 @@
                         <span class="lastLog">{{format(users[activeIndex].lastLog) }}</span>
                     </div>
                 </div>
-                <div class="headUtilities">
+                <div @click="toggleInvisible()" @mouseleave="toggleInvisible()" class="headUtilities">
                     <button><i class="fas fa-search"></i></button>
                     <button><i class="fas fa-paperclip"></i></button>
                     <!-- ELIMINAZIONE CHAT O MESSAGGI DENTRO LA CHAT -->
-                    <button @click="toggleInvisible()">
+                    <button>
                         <i class="fas fa-ellipsis-v"></i>
                         <div class="deleteAllChat" v-show="deleteAllChat">
                             <p @click="deleteAllMsg()">Delete this whole chat</p>

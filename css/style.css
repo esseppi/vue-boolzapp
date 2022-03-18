@@ -302,7 +302,7 @@ button {
 }
 @media screen and (max-width: 560px) {
   .chats {
-    height: calc(var(---chats-height) - var(---deskNotify-height));
+    height: calc(var(---chats-height) + var(---deskNotify-height));
   }
   .leftSide {
     min-width: none;

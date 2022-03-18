@@ -169,6 +169,7 @@ const app = new Vue({
     deleteAllChat: false,
     openNewChats: false,
     plusContacts: false,
+    deleteArrowDown: false,
     // dichiarazione variabili da usare nei metodi
     search: '',
     newImg: '',
@@ -310,8 +311,11 @@ const app = new Vue({
       });
     },
     // menu eliminazione messaggio singolo indicizzato
-    isShow(object) {
-      object.isShow = !object.isShow;
+    // isShow(object) {
+    //   object.isShow = !object.isShow;
+    // },
+    isShow(result) {
+      this.deleteArrowDown = result;
     },
     isShowed(toggle) {
       this.openNewChats = toggle;

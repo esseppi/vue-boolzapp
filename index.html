@@ -109,9 +109,9 @@
             <div class="textArea">
                 <div v-for="(message, messageIndex) in users[activeIndex].messages" class="message"
                     :class="{'sent': message.sent, 'received': !message.sent}">
-                    <div @click.prevent="isShow(message)" class="invisible">
+                    <div @click.prevent="isShow(true)" class="invisible">
                         <i class="fas fa-chevron-down"></i>
-                        <div class="infoDelete" v-show="!message.isShow">
+                        <div class="infoDelete" @mouseleave="isShow(false)" v-show="deleteArrowDown">
                             <p @click="deleteMsg(messageIndex)">Elimina messaggio</p>
                         </div>
                     </div>

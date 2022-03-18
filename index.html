@@ -81,7 +81,7 @@
         <!-- sezione destra textarea DX-->
         <section class="rightSide">
             <!-- HEADING OPEN CHAT  DX-->
-            <div class="heading beetwen">
+            <div @mouseleave="toggleInvisible(false)" class="heading beetwen">
                 <div class="beetwen">
                     <div class="profileImg">
                         <img :src="users[activeIndex].img" alt="" srcset="">
@@ -92,7 +92,7 @@
                         <span class="lastLog">{{format(users[activeIndex].lastLog) }}</span>
                     </div>
                 </div>
-                <div @click="toggleInvisible()" class="headUtilities">
+                <div @click="toggleInvisible(true)" class="headUtilities">
                     <button><i class="fas fa-search"></i></button>
                     <button><i class="fas fa-paperclip"></i></button>
                     <!-- ELIMINAZIONE CHAT O MESSAGGI DENTRO LA CHAT -->

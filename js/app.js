@@ -346,8 +346,8 @@ const app = new Vue({
       }
     },
     // eliminazione tutta chat
-    toggleInvisible() {
-      this.deleteAllChat = !this.deleteAllChat;
+    toggleInvisible(result) {
+      this.deleteAllChat = result;
     },
     // visibilità input per aggiunta nuova chat
   },

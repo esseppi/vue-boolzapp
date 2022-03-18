@@ -51,10 +51,11 @@
                 <input v-model="search" type="text" class="input-text" placeholder="Cerca o inizia una nuova chat">
             </div>
             <!-- RUBRICA CHAT APERTE SX -->
-            <div @mouseover="showAddContact = true" @mouseleave="showAddContact = false" class="chats">
-                <div v-show="showAddContact" @click="showAddContact" class="addChat"><button><i
-                            class="fas fa-plus"></i></button></div>
-                <div v-show="addChatShow" class="infoDelete">
+            <div @mouseleave="isShowed(false)" class="chats">
+                <div @click="isShowed(true)" class="addChat"><button>
+                        <i class="fas fa-plus"></i>
+                    </button></div>
+                <div v-show="openNewChats" class="infoDelete">
                     <input type="text" v-model="newName" placeholder="Inserisci il nome del contatto">
                     <br>
                     <input @keyUp.enter="addChat()" type="text" v-model="newImg"

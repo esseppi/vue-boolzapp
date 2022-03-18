@@ -158,6 +158,9 @@ body {
   height: 100%;
   overflow-y: scroll;
 }
+.chats:hover .addChat {
+  display: block;
+}
 
 li {
   margin: 8px 0;

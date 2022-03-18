@@ -167,8 +167,7 @@ const app = new Vue({
     activeIndex: 0,
     // interruttori visibilità
     deleteAllChat: false,
-    addChatShow: false,
-    showAddContact: 0,
+    openNewChats: false,
     // dichiarazione variabili da usare nei metodi
     search: '',
     newImg: '',
@@ -309,9 +308,12 @@ const app = new Vue({
         console.log(i);
       });
     },
-    // menu eliminazione messaggio singolo
-    isShow(message) {
-      message.isShow = !message.isShow;
+    // menu eliminazione messaggio singolo indicizzato
+    isShow(object) {
+      object.isShow = !object.isShow;
+    },
+    isShowed(toggle) {
+      this.openNewChats = toggle;
     },
     // eliminazione messaggio singolo
     deleteMsg(messageIndex) {
@@ -340,9 +342,6 @@ const app = new Vue({
       this.deleteAllChat = !this.deleteAllChat;
     },
     // visibilità input per aggiunta nuova chat
-    showAddContact() {
-      this.addChatShow = !this.addChatShow;
-    },
   },
   // recupero ultimi mesaggi e ultimi log al caricamento della pagina
   created() {

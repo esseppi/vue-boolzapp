@@ -63,9 +63,9 @@
                 <ul>
                     <div @click="showAddContact" class="addChat"><i class="fas fa-plus"></i></div>
                     <div v-show="addChatShow" class="infoDelete">
-                        <input type="text" v-model.trim="newName" placeholder="Inserisci il nome del contatto">
+                        <input type="text" v-model="newName" placeholder="Inserisci il nome del contatto">
                         <br>
-                        <input @keyUp.enter="addChat()" type="text" v-model.trim="newImg"
+                        <input @keyUp.enter="addChat()" type="text" v-model="newImg"
                             placeholder="Inserisci la foto del contatto">
                         <button @click="addChat()"><i class="fas fa-plus"></i></button>
                     </div>

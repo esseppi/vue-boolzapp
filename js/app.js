@@ -256,10 +256,6 @@ const app = new Vue({
         i++;
       });
     },
-    // generazione automatica nuovo contatto id
-    newMakeId() {
-      this;
-    },
     // menu eliminazione messaggio singolo
     isShow(message) {
       message.isShow = !message.isShow;
@@ -287,8 +283,12 @@ const app = new Vue({
 
     // aggiungo nuovo contatto/chat
     addChat() {
+      if (this.newImg == '' || this.newImg != undefined) {
+        this.newImg = 'https://picsum.photos/seed/picsum/200/300';
+      }
+      console.log(this.newImg);
       let newUser = {
-        id: '',
+        id: this.users.length,
         name: this.newName,
         text: '',
         lastLog: '',
@@ -298,7 +298,6 @@ const app = new Vue({
       if (this.newName.replace(/\s/g, '').length && this.newName != undefined) {
         this.users.push(newUser);
         this.showAddContact();
-        console.log(this.newName);
       } else return;
       this.newName = '';
       this.newImg = '';

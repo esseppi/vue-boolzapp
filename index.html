@@ -61,6 +61,14 @@
             <!-- RUBRICA CHAT APERTE SX -->
             <div class="chats">
                 <ul>
+                    <div @click="showAddContact" class="addChat"><i class="fas fa-plus"></i></div>
+                    <div v-show="addChatShow" class="infoDelete">
+                        <input type="text" v-model.trim="newName" placeholder="Inserisci il nome del contatto">
+                        <br>
+                        <input @keyUp.enter="addChat()" type="text" v-model.trim="newImg"
+                            placeholder="Inserisci la foto del contatto">
+                        <button @click="addChat()"><i class="fas fa-plus"></i></button>
+                    </div>
                     <li v-for="(user, index) in filterUsers(search)" :key="user.id" @click="selectedChat(user.id)"
                         class="chatRow">
                         <div class="profileImg">
@@ -69,9 +77,7 @@
                         <div class="profileInfo">
                             <p>{{ user.name }}</p>
                             <span class="lastMsg">{{ user.text }}</span>
-                            <span class="lastLog">
-                                {{ format(user.lastLog) }}
-                            </span>
+                            <span class="lastLog">{{ format(user.lastLog) }}</span>
                         </div>
                     </li>
                 </ul>
@@ -89,7 +95,7 @@
                     <!-- user openchat info DX -->
                     <div class="profileInfo">
                         <p>{{ users[activeIndex].name }}</p>
-                        <sub>{{format(users[activeIndex].lastLog) }}</sub>
+                        <span class="lastLog">{{format(users[activeIndex].lastLog) }}</span>
                     </div>
                 </div>
                 <div class="headUtilities">
@@ -99,8 +105,10 @@
                     <button>
                         <i class="fas fa-paperclip"></i>
                     </button>
-                    <button>
+                    <button @click="toggleInvisible()">
                         <i class="fas fa-ellipsis-v"></i>
+                        <div class="deleteAllChat" @click="deleteAllMsg()" v-show="deleteAllChat">Delete this whole chat
+                        </div>
                     </button>
                 </div>
             </div>
@@ -110,7 +118,7 @@
                     :class="{'sent': message.sent, 'received': !message.sent}">
                     <div @click.prevent="isShow(message)" class="invisible">
                         <i class="fas fa-chevron-down"></i>
-                        <div class="infoDelete" :class="{'invisible': message.isShow}">
+                        <div class="infoDelete" v-show="!message.isShow">
                             <p @click="deleteMsg(messageIndex)">Elimina messaggio</p>
                         </div>
                     </div>
@@ -122,9 +130,10 @@
             <!-- inserimento nuovi messaggi -->
             <div class="newMsg">
                 <button><i class="far fa-smile"></i></button>
-                <input v-model="users[activeIndex].messages.text" @keyUp.enter="sendMsg(activeIndex)" class="input-text"
-                    type="text" placeholder="Scrivi un messaggio">
-                <button><i class="fas fa-microphone"></i></button>
+                <input v-model.trim="users[activeIndex].messages.text" @keyUp.enter="sendMsg(activeIndex)"
+                    class="input-text" type="text" placeholder="Scrivi un messaggio">
+                <button v-if="users[activeIndex].messages.text == ''"><i class="fas fa-microphone"></i></button>
+                <button v-else @click="sendMsg(activeIndex)"><i class="fa-solid fa-paper-plane"></i></button>
             </div>
         </section>
 

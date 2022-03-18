@@ -2,19 +2,9 @@ const app = new Vue({
   el: '#app',
   data: {
     activeIndex: 0,
+    deleteAllChat: false,
+    addChatShow: false,
     search: '',
-    newMsg: {
-      date: '',
-      text: '',
-      sent: true,
-      isShow: true,
-    },
-    replyMsg: {
-      date: '',
-      text: 'Ok',
-      sent: false,
-      isShow: true,
-    },
     userLogged: {
       name: 'Salvatore',
       text: 'Ultimo messaggio inviato',
@@ -44,7 +34,7 @@ const app = new Vue({
         ],
       },
       {
-        id: 1,
+        id: '',
         name: 'Michele',
         text: '',
         lastLog: '',
@@ -65,7 +55,7 @@ const app = new Vue({
         ],
       },
       {
-        id: 2,
+        id: '',
         name: 'Alessandro L.',
         text: '',
         lastLog: '',
@@ -86,7 +76,7 @@ const app = new Vue({
         ],
       },
       {
-        id: 3,
+        id: '',
         name: 'Alessandro B.',
         text: '',
         lastLog: '',
@@ -107,7 +97,7 @@ const app = new Vue({
         ],
       },
       {
-        id: 4,
+        id: '',
         name: 'Claudia',
         text: '',
         lastLog: '',
@@ -128,7 +118,7 @@ const app = new Vue({
         ],
       },
       {
-        id: 5,
+        id: '',
         name: 'Federico',
         text: '',
         lastLog: '',
@@ -136,7 +126,7 @@ const app = new Vue({
         messages: [],
       },
       {
-        id: 6,
+        id: '',
         name: 'Davide',
         text: '',
         lastLog: '',
@@ -157,7 +147,7 @@ const app = new Vue({
         ],
       },
       {
-        id: 7,
+        id: '',
         name: 'Giulio',
         text: '',
         lastLog: '',
@@ -165,7 +155,7 @@ const app = new Vue({
         messages: [],
       },
       {
-        id: 8,
+        id: '',
         name: 'Claudio',
         text: '',
         lastLog: '',
@@ -180,7 +170,7 @@ const app = new Vue({
     },
   },
   methods: {
-    // filtro chat
+    // filtro chat agendo direttamente sull'object 'users'
     filterUsers(search) {
       if (search == '') {
         return this.users;
@@ -190,13 +180,14 @@ const app = new Vue({
         });
       }
     },
+    // modifico la data nel formato richiesto
     format(date) {
       let formattedDate = 'dd/MM/yyyy hh:mm';
       if (date != '') {
         return luxon.DateTime.fromISO(date).toFormat(formattedDate);
       }
     },
-    // risposta
+    // risposta automatica chiamata ad ogni sendMsg() nella chat indicizzata in QUEL momento
     reply(activeIndex) {
       let replyMsg = {
         date: luxon.DateTime.now().toISO().split('.')[0],
@@ -207,7 +198,7 @@ const app = new Vue({
       this.users[activeIndex].messages.push(replyMsg);
       this.scrollToBottom();
     },
-    // invio messaggio
+    // invio messaggio e lo inserisco nell'object della chat indicizzata
     sendMsg(activeIndex) {
       const activeChat = this.users[this.activeIndex];
       let newMsg = {
@@ -226,6 +217,7 @@ const app = new Vue({
       // chiamata risposta dopo un secondo
       setTimeout(this.reply, 3000, activeIndex);
     },
+    // scrolla verso il basso tutte le chat, è chiamata ad ogni nuovo sendMsg()
     scrollToBottom() {
       const container = this.$el.querySelector('.textArea');
       container.scrollTop = container.scrollHeight;
@@ -234,6 +226,7 @@ const app = new Vue({
     selectedChat(key) {
       this.activeIndex = key;
     },
+    // recupero ultimo messaggio in una chat
     getLastMsg() {
       this.users.forEach((user) => {
         if (user.messages.length < 1) {
@@ -243,6 +236,7 @@ const app = new Vue({
         }
       });
     },
+    // recupero data di ultimo messaggio in una chat
     getLastLog() {
       this.users.forEach((user) => {
         if (
@@ -255,21 +249,62 @@ const app = new Vue({
         }
       });
     },
+    // generazione automatica di un id per ogni contatto
     makeId() {
       this.users.forEach((user, i) => {
         user.id = i;
         i++;
       });
     },
+    // generazione automatica nuovo contatto id
+    newMakeId() {
+      this;
+    },
+    // menu eliminazione messaggio singolo
     isShow(message) {
       message.isShow = !message.isShow;
     },
+    // eliminazione messaggio singolo
     deleteMsg(messageIndex) {
       this.users[this.activeIndex].messages.splice(messageIndex, 1);
       this.getLastMsg();
       this.getLastLog();
     },
+    // menu eliminazione tutta chat
+    deleteAllMsg() {
+      this.users[this.activeIndex].messages = [];
+      this.getLastMsg();
+      this.getLastLog();
+    },
+    // eliminazione tutta chat
+    toggleInvisible() {
+      this.deleteAllChat = !this.deleteAllChat;
+    },
+    // visibilità input per aggiunta nuova chat
+    showAddContact() {
+      this.addChatShow = !this.addChatShow;
+    },
+
+    // aggiungo nuovo contatto/chat
+    addChat() {
+      let newUser = {
+        id: '',
+        name: this.newName,
+        text: '',
+        lastLog: '',
+        img: this.newImg,
+        messages: [],
+      };
+      if (this.newName.replace(/\s/g, '').length && this.newName != undefined) {
+        this.users.push(newUser);
+        this.showAddContact();
+        console.log(this.newName);
+      } else return;
+      this.newName = '';
+      this.newImg = '';
+    },
   },
+  // recupero ultimi mesaggi e ultimi log al caricamento della pagina
   created() {
     this.getLastMsg();
     this.getLastLog();

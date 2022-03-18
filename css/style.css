@@ -134,6 +134,7 @@ body {
 /* chats */
 
 .chats {
+  position: relative;
   height: var(---chats-height);
 }
 .chatRow {
@@ -154,6 +155,9 @@ li {
 
 li:hover {
   background-color: #e9ebeb;
+  cursor: pointer;
+}
+button {
   cursor: pointer;
 }
 
@@ -238,9 +242,7 @@ li:hover {
 .invisible {
   display: none;
 }
-.visible {
-  display: block;
-}
+
 .message:hover > .invisible {
   display: block;
   cursor: pointer;
@@ -264,4 +266,21 @@ li:hover {
   position: absolute;
   top: 1.4rem;
   right: 1.4rem;
+}
+.headUtilities button {
+  position: relative;
+}
+.deleteAllChat {
+  padding: 0.3rem;
+  z-index: 2;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 0.1rem;
+  position: absolute;
+  top: 1.4rem;
+  right: 1.4rem;
+}
+.addChat {
+  position: absolute;
+  right: 1rem;
 }

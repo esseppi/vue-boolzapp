@@ -168,6 +168,7 @@ const app = new Vue({
     // interruttori visibilità
     deleteAllChat: false,
     openNewChats: false,
+    plusContacts: false,
     // dichiarazione variabili da usare nei metodi
     search: '',
     newImg: '',
@@ -314,6 +315,9 @@ const app = new Vue({
     },
     isShowed(toggle) {
       this.openNewChats = toggle;
+    },
+    plusContact(toggle) {
+      this.plusContacts = toggle;
     },
     // eliminazione messaggio singolo
     deleteMsg(messageIndex) {

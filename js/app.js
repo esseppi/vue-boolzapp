@@ -239,12 +239,18 @@ const app = new Vue({
         img: this.newImg,
         messages: [],
       };
+      if (this.newImg.length < 1) {
+        this.newImg =
+          'https://logos-download.com/wp-content/uploads/2016/06/Bitcoin_logo_yellow.png';
+      } else {
+        this.img = this.newImg;
+      }
       if (this.newName.replace(/\s/g, '').length && this.newName != undefined) {
         this.users.push(newUser);
         this.newName = '';
         this.newImg = '';
+        setTimeout(this.scrollToBottomContact, 100);
       } else return;
-      setTimeout(this.scrollToBottomContact, 100);
     },
     // filtro chat agendo direttamente sull'object 'users'
     filterUsers(search) {

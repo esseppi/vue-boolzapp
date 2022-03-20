@@ -241,7 +241,6 @@ const app = new Vue({
       };
       if (this.newName.replace(/\s/g, '').length && this.newName != undefined) {
         this.users.push(newUser);
-        this.showAddContact();
         this.newName = '';
         this.newImg = '';
       } else return;
